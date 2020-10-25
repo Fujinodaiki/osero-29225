@@ -26,12 +26,12 @@ def mouse_right(e):
 
 osero = [
   [0,0,0,0,0,0,0,0],
+  [0,2,0,2,0,0,2,0],
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0],
+  [0,2,0,0,0,0,2,0],
   [0,0,0,0,2,0,0,0],
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0],
+  [0,2,0,2,2,0,2,0],
   [0,0,0,0,0,0,0,0]
 ]
 
@@ -60,12 +60,40 @@ def game_main():
     cursor_y = int(mouse_y/72)
     if mouse_c == 1 and mouse_lc == 0:
       mouse_c = 0
-      if pl_t == 0:     
+      if pl_t == 0:
+        if cursor_x == 0:
+          if cursor_y == 0:
+            if osero[cursor_y][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x] == 2:
+              osero[cursor_y][cursor_x] = 1
+          elif cursor_y == 7:
+            if osero[cursor_y-1][cursor_x] == 2 or osero[cursor_y-1][cursor_x+1] == 2 or osero[cursor_y][cursor_x+1] == 2:
+              osero[cursor_y][cursor_x] = 1
+          else:
+            if osero[cursor_y-1][cursor_x] == 2 or osero[cursor_y-1][cursor_x+1] == 2 or osero[cursor_y][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x] == 2:
+              osero[cursor_y][cursor_x] = 1
+        elif cursor_y == 0 and cursor_x == 7:
+          if osero[cursor_y][cursor_x-1] == 2 or osero[cursor_y+1][cursor_x-1] == 2 or osero[cursor_y+1][cursor_x] == 2:
             osero[cursor_y][cursor_x] = 1
-          pl_t = 1
-      else:
-        osero[cursor_y][cursor_x] = 2
-        pl_t = 0
+        elif cursor_y == 0 and cursor_x != 7:
+          if osero[cursor_y][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x] == 2 or osero[cursor_y+1][cursor_x-1] == 2 or osero[cursor_y][cursor_x-1] == 2:
+            osero[cursor_y][cursor_x] = 1
+        elif cursor_y == 7 and cursor_x == 7:
+          if osero[cursor_y][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x] == 2:
+            osero[cursor_y][cursor_x] = 1
+        elif cursor_y != 7 and cursor_x == 7:
+          if osero[cursor_y-1][cursor_x] == 2 or osero[cursor_y-1][cursor_x-1] == 2 or osero[cursor_y][cursor_x-1] == 2 or osero[cursor_y+1][cursor_x-1] == 2 or osero[cursor_y+1][cursor_x] == 2:
+            osero[cursor_y][cursor_x] = 1
+        elif cursor_y == 7 and cursor_x > 0 and cursor_x < 7:
+          if  osero[cursor_y][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x] == 2 or osero[cursor_y+1][cursor_x+1] == 2 or osero[cursor_y][cursor_x+1] == 2:
+            osero[cursor_y][cursor_x] = 1
+        else:
+          if osero[cursor_y+1][cursor_x-1] == 2 or osero[cursor_y][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x-1] == 2 or osero[cursor_y-1][cursor_x] == 2 or osero[cursor_y-1][cursor_x+1] == 2 or osero[cursor_y][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x+1] == 2 or osero[cursor_y+1][cursor_x] == 2:
+            osero[cursor_y][cursor_x] = 1
+      #       pl_t = 1
+      # else:
+      #     if osero[cursor_y+1][cursor_x-1] == 1 or osero[cursor_y][cursor_x-1] == 1 or osero[cursor_y-1][cursor_x-1] == 1 or osero[cursor_y-1][cursor_x] == 1 or osero[cursor_y-1][cursor_x+1] == 1 or osero[cursor_y][cursor_x+1] == 1 or osero[cursor_y+1][cursor_x+1] == 1 or osero[cursor_y+1][cursor_x] == 1:
+      #       osero[cursor_y][cursor_x] = 2
+      #       pl_t = 0
     elif mouse_c == 0 and mouse_lc == 1:
       mouse_lc = 0
       osero[cursor_y][cursor_x] = 0
